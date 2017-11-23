@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>camera001.png</file>
+        <file>camera002.png</file>
+        <file>camera003.png</file>
+        <file>camera004.png</file>
+        <file>camera005.jpg</file>
+        <file>camera006.jpg</file>
+        <file>camera007.jpg</file>
+        <file>camera008.jpg</file>
+        <file>camera009.jpg</file>
+        <file>camera010.png</file>
+        <file>logo_dark.png</file>
+    </qresource>
+    <qresource prefix="/InstructionWeb">
+        <file>aubocCamera.html</file>
+        <file>aubocCameraEnglish.html</file>
+    </qresource>
+</RCC>

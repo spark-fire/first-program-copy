@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Aubo-i5机器人视觉定位快速编程指南</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style>
+	<!-->
+		/** BASIC */
+
+	body {
+		margin: 0px;
+		padding: 0px;
+		font: normal small Arial, Helvetica, sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background:rgba(0,0,0,0.4);
+        }
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-weight: normal;
+		font-style: italic;
+		color: #FF6600;
+	}
+
+	a {
+		color: #FF6600;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	/** HEADER */
+
+	#header {
+		padding: 1em;
+		background: #FFFFCC;
+		border-bottom: 2px solid #FF6600;
+	}
+
+	#header h1 {
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+		font-weight: bold;
+		letter-spacing: .2em;
+		color: #FF6600;
+	}
+
+	#header h2 {
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+		font-weight: bold;
+		font-size: 14px;
+		letter-spacing: .2em;
+		color: #FF6600;
+	}
+
+	/** MENU */
+
+	#menu {
+		padding: .3em;
+		background: #FFFF99;
+		border-bottom: 2px solid #FF6600;
+		text-align: center;
+	}
+
+	#menu ul {
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
+
+	#menu li {
+		display: inline;
+	}
+
+	#menu a {
+		padding: 0em 2em;
+		text-decoration: none;
+		font-weight: bold;
+		color: #FF6600;
+	}
+
+	#menu a:hover {
+		background: #FF6600;
+		color: #FFFFFF;
+	}
+
+	/** CONTENT */
+
+	#content {
+                width: 470px;
+		margin: 0px auto;
+		padding: 2em;
+	}
+
+	#columnA {
+		float: right;
+		width: 480px;
+	}
+
+	#columnB {
+		float: left;
+		width: 200px;
+	}
+
+	/** FOOTER */
+
+	#footer {
+		clear: both;
+		padding: .3em;
+		background: #FFFF99;
+		border-top: 2px solid #FF6600;
+		border-bottom: 2px solid #FF6600;
+		text-align: center;
+	}
+
+	#footer p {
+		margin: 0px;
+		padding: 0px;
+	}
+	-->
+</style>
+</head>
+<body>
+<div id="header">
+	<h1>Aubo-i5机器人视觉定位快速编程说明</h1>
+</div>
+<div id="menu">
+	<ul>
+                <li><a href="#">中文</a></li>
+                <li><a href="qrc:/InstructionWeb/aubocCameraEnglish.html">English</a></li>
+	</ul>
+</div>
+<div id="content">
+	<div id="columnA">
+		<h2 style='margin-left:130.0pt;text-indent:22.0pt'><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>安全须知</span></h2>
+                <p><span lang=EN-US style='font-size:14.0pt;line-height:172%;font-family:宋体'>1、要求操作人员能够熟悉Aubo - i5机器人的操作手册，规范操作过程。</span></p>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>2、程序编写完成之后要先进行机器人的仿真操作，确保无误之后再进行实际操作。</p>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>3、若遇到突发情况请迅速按下急停按钮，确保安全。</span></p>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>4、Inspector PIM60在使用前要先进行参考物、坐标系等设置，详见Inspector PIM60操作手册。</span></p>
+		<h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>一、概述：</span></h2>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Camera插件可以通过Inspector PIM60获取物体的位置信息，并将位置信息反馈给机械臂，反馈信息被机械臂用于辅助定位，极大地增加了机械臂在实际应用过程中的柔性。</span></p>
+		<h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>二、硬件连接说明</span></h2>
+        <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用Inspector PIM60前需进行硬件连接，具体参数如下。</span></p>
+            <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                    <img width=482 height=284 id="图片 1" src="qrc:/images/camera001.png"></span></p>
+            <p style='text-align:center;'>
+                <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图1 Inspector PIM60参数图</span></p>
+
+        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                <img width=482 height=284 id="图片 2" src="qrc:/images/camera002.png"></span></p>
+        <p style='text-align:center;'>
+            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图2 Inspector PIM60连接示意图</span></p>
+
+        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                <img width=482 height=284 id="图片 3" src="qrc:/images/camera003.png"></span></p>
+        <p style='text-align:center;'>
+            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图3 Inspector PIM60线序说明</span></p>
+
+        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                <img width=482 height=284 id="图片 4" src="qrc:/images/camera004.png"></span></p>
+        <p style='text-align:center;'>
+            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图4 Inspector PIM60指示灯说明</span></p>
+
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>三.设置说明</span></h2>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.依次选择setting -> peripheral(外设界面) -> Camera界面。</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.在Settings选项卡中设置Inspector PIM60的IP地址，如192.168.0.101;选择快照的保存路径，如/root/SICK_Pictures。</span></p>
+                <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                    <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                        <img width=482 height=284 id="图片 5" src="qrc:/images/camera005.jpg"></span></p>
+                <p style='text-align:center;'>
+                    <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图5 Inspector PIM60初始化设置</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.设置Coordinate Compensation(坐标补偿)，此补偿是对Inspector PIM60每次传递给机械臂坐标的总体补偿，单位为米。设置完成后点击Save按钮。</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.点击init Camera按钮后，相机会进行拍照，可在Camera选项卡中查看图片，具体内容在选项卡中有详细说明。</span></p>
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>四.选项卡说明</span></h2>
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>1.Camera选项卡</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;①Show按钮，点击后显示Inspector PIM60拍摄的图片;</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;②实时显示Inspector PIM60拍摄的图像，实时显示Inspector PIM60拍摄的图像。显示模式主要有以下几种。</span></p>
+                        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                <img width=482 height=284 id="图片 6" src="qrc:/images/camera006.jpg"></span></p>
+                        <p style='text-align:center;'>
+                            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图6 原始图像</span></p>
+
+                        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                <img width=482 height=284 id="图片 7" src="qrc:/images/camera007.jpg"></span></p>
+                        <p style='text-align:center;'>
+                            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图7 覆盖图像</span></p>
+
+                        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                <img width=482 height=284 id="图片 8" src="qrc:/images/camera008.jpg"></span></p>
+                        <p style='text-align:center;'>
+                            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图8 简单覆盖图像</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;③保存当前图片按钮。</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击后，保存智能相机当前图片到预先设置的路径下。</span></p>
+
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>2.Data选项卡</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;①显示Inspector PIM60拍摄到工件的X、Y位置信息。</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;②Inspector PIM60拍照的示教点，点击Check示教完成。拍照时注意Inspector PIM60的姿态和焦距。</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;③Camera result output，显示Inspector PIM60的原始数据。</span></p>
+                            <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                                <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                    <img width=482 height=284 id="图片 9" src="qrc:/images/camera009.jpg"></span></p>
+                            <p style='text-align:center;'>
+                                <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图9 数据示意图</span></p>
+
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>3.Config选项卡</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预置的信息，如：PositionX、PositionY、PositionZ。预置信息可以Fill All(全部填充)，也可以选中后点击Delete删除表格中的信息。</span></p>
+                            <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                                <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                    <img width=482 height=284 id="图片 10" src="qrc:/images/camera010.png"></span></p>
+                            <p style='text-align:center;'>
+                                <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>图10 全部填充示意图</span></p>
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>4.About选项</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相关信息描述。</span></p>
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>五.用户接口</span></h2>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户进行相关设置后，可以在脚本中使用相关接口，如下:</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get_waypoint_from_camera(</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const double &compensationX,</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const double &compensationY,</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double &positionZ,true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前两个参数为摄像机坐标补偿，第三个参数为机械臂运动到的Z方向的高度，最后一个参数为确定Inspector PIM60是否拍照，单位为米。正常完调用完此函数后会返回机械臂的6个关节角，单位为弧度。</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_joint({j1,j2,j3,j4,j5,j6},true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传入参数为机械臂的6个关节角，单位为弧度，在关节空间内移动到位置。</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_line({j1,j2,j3,j4,j5,j6},true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传入参数为机械臂的6个关节角，单位为弧度。在空间内线性移动到位置。</span></p>
+
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>六.Demo</span></h2>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以关节运动形式到到摄像机所给位置</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_joint(get_waypoint_from_camera(</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0018,0.01270,0.399,true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以直线运动形式到到摄像机所给位置</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_line(get_waypoint_from_camera(</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0018,0.01270,0.399,true)</span></p>
+
+	</div>
+	<div id="columnB">
+
+	</div>
+</div>
+<div id="footer">
+	<p><a href="http://www.our-robotics.com/" class="link1">遨博（北京）智能科技有限公司</a>  </p>
+</div>
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span><span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

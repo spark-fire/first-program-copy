@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Aubo-i5机器人视觉定位快速编程指南</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style>
+	<!-->
+		/** BASIC */
+
+	body {
+		margin: 0px;
+		padding: 0px;
+		font: normal small Arial, Helvetica, sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background:rgba(0,0,0,0.4);
+        }
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-weight: normal;
+		font-style: italic;
+		color: #FF6600;
+	}
+
+	a {
+		color: #FF6600;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	/** HEADER */
+
+	#header {
+		padding: 1em;
+		background: #FFFFCC;
+		border-bottom: 2px solid #FF6600;
+	}
+
+	#header h1 {
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+		font-weight: bold;
+		letter-spacing: .2em;
+		color: #FF6600;
+	}
+
+	#header h2 {
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+		font-weight: bold;
+		font-size: 14px;
+		letter-spacing: .2em;
+		color: #FF6600;
+	}
+
+	/** MENU */
+
+	#menu {
+		padding: .3em;
+		background: #FFFF99;
+		border-bottom: 2px solid #FF6600;
+		text-align: center;
+	}
+
+	#menu ul {
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
+
+	#menu li {
+		display: inline;
+	}
+
+	#menu a {
+		padding: 0em 2em;
+		text-decoration: none;
+		font-weight: bold;
+		color: #FF6600;
+	}
+
+	#menu a:hover {
+		background: #FF6600;
+		color: #FFFFFF;
+	}
+
+	/** CONTENT */
+
+	#content {
+                width: 470px;
+		margin: 0px auto;
+		padding: 2em;
+	}
+
+	#columnA {
+		float: right;
+		width: 480px;
+	}
+
+	#columnB {
+		float: left;
+		width: 200px;
+	}
+
+	/** FOOTER */
+
+	#footer {
+		clear: both;
+		padding: .3em;
+		background: #FFFF99;
+		border-top: 2px solid #FF6600;
+		border-bottom: 2px solid #FF6600;
+		text-align: center;
+	}
+
+	#footer p {
+		margin: 0px;
+		padding: 0px;
+	}
+	-->
+</style>
+</head>
+<body>
+<div id="header">
+	<h1>Aubo-i5 robot vision positioning quickstart instructions</h1>
+</div>
+<div id="menu">
+	<ul>
+                <li><a href="qrc:/InstructionWeb/aubocCamera.html">中文</a></li>
+                <li><a href="#">English</a></li>
+	</ul>
+</div>
+<div id="content">
+	<div id="columnA">
+                <h2 style='text-align:center;><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>Safety instructions</span></h2>
+                <p><span lang=EN-US style='font-size:14.0pt;line-height:172%;font-family:宋体'>1. The operator is required to be familiar with Aubo - i5 robot 's operation manual, regulate the operation process.</span></p>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>2. Program is completed after the completion of the robot simulation operation, to ensure correct after the actual operation.</p>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>3. In case of unexpected situations, please quickly press the emergency button to ensure safety.</span></p>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>4. Inspector PIM60 before using reference objects, coordinate system and other settings, see Inspector PIM60 operating manual.</span></p>
+		<h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>I. Overview：</span></h2>
+                <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Camera plug-in can obtain the position information of the object through the Inspector PIM60 and feedback the position information to the manipulator. The feedback information is used by the manipulator to assist positioning, which greatly increases the flexibility of the manipulator in the practical application.</span></p>
+		<h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>II. the hardware connection instructions</span></h2>
+        <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before using the Inspector PIM60, hardware connection is required. The specific parameters are as follows.</span></p>
+            <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                    <img width=482 height=284 id="图片 1" src="qrc:/images/camera001.png"></span></p>
+            <p style='text-align:center;'>
+                <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 1 Inspector PIM60 parameter diagram</span></p>
+
+        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                <img width=482 height=284 id="图片 2" src="qrc:/images/camera002.png"></span></p>
+        <p style='text-align:center;'>
+            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 2 Inspector PIM60 connection diagram</span></p>
+
+        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                <img width=482 height=284 id="图片 3" src="qrc:/images/camera003.png"></span></p>
+        <p style='text-align:center;'>
+            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 3 Inspector PIM60 line sequence description</span></p>
+
+        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                <img width=482 height=284 id="图片 4" src="qrc:/images/camera004.png"></span></p>
+        <p style='text-align:center;'>
+            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 4 Inspector PIM60 LED description</span></p>
+
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>III. Setting instructions</span></h2>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Select setting -> peripheral -> Camera interface.</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Set the IP address of the Inspector PIM60 in the Settings tab, for example 192.168.0.101; select the save path for the snapshot, for example / root / SICK_Pictures.</span></p>
+                <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                    <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                        <img width=482 height=284 id="图片 5" src="qrc:/images/camera005.jpg"></span></p>
+                <p style='text-align:center;'>
+                    <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 5 Inspector PIM60 initialization settings</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Set Coordinate Compensation, which is the total compensation each time the Inspector PIM60 passes to the robot arm in meters. After setting, click the Save button.</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Click the init Camera button, the camera will take pictures, you can view the picture in the Camera tab, the specific content in the tab has a detailed description.</span></p>
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>IV. Tab description</span></h2>
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>1.Camera tab</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;①Show button, click to display the picture taken by Inspector PIM60;</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② Real-time display Inspector PIM60 images taken in real-time display Inspector PIM60 images taken. There are several display modes.</span></p>
+                        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                <img width=482 height=284 id="图片 6" src="qrc:/images/camera006.jpg"></span></p>
+                        <p style='text-align:center;'>
+                            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 6 The original image</span></p>
+
+                        <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                <img width=482 height=284 id="图片 7" src="qrc:/images/camera007.jpg"></span></p>
+                        <p style='text-align:center;'>
+                            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 7 covers the image</span></p>
+
+                        <p class=MsoListParagraph style='Figure 7 covers the imagemargin-left:0.0pt;text-indent:0cm'>
+                            <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                <img width=482 height=284 id="图片 8" src="qrc:/images/camera008.jpg"></span></p>
+                        <p style='text-align:center;'>
+                            <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 8 simple cover image</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;③ save the current picture button.</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click to save the smart camera's current image to the pre-set path.</span></p>
+
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>2.Data tab</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① Display Inspector PIM60 captured the workpiece X, Y position information.</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;②Inspector PIM60 camera teaching point, click Check to teach completed. Take note of the attitude and focus of the Inspector PIM60 when taking pictures.</span></p>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;③Camera result output, showing the raw data of Inspector PIM60.</span></p>
+                            <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                                <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                    <img width=482 height=284 id="图片 9" src="qrc:/images/camera009.jpg"></span></p>
+                            <p style='text-align:center;'>
+                                <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 9 data diagram</span></p>
+
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>3.Config tab</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Preset information, such as: PositionX, PositionY, PositionZ. The preset information can be Fill All or selected and click Delete to delete the information in the table.</span></p>
+                            <p class=MsoListParagraph style='margin-left:0.0pt;text-indent:0cm'>
+                                <span lang=EN-US style='font-size:14.0pt;font-family:宋体'>
+                                    <img width=482 height=284 id="图片 10" src="qrc:/images/camera010.png"></span></p>
+                            <p style='text-align:center;'>
+                                <span style='font-size:12.0pt;line-height:172%;font-family:宋体'>Figure 10 fully filled schematic</span></p>
+                <h3><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>4.About option</span></h3>
+                    <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Related Information Description.</span></p>
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>V. user interface</span></h2>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User related settings, you can use the relevant interface in the script, as follows:</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get_waypoint_from_camera(</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const double &compensationX,</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const double &compensationY,</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double &positionZ,true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The first two parameters are camera coordinates. The third parameter is the height of the Z direction to which the manipulator moves. The last parameter is to determine if the Inspector PIM60 takes pictures in meters. Normal completion After the function is finished, the six joint angles of the manipulator will be returned, in radians.</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_joint({j1,j2,j3,j4,j5,j6},true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Incoming parameters are the six joint angles of the manipulator, in radians, moving to the position within the joint space.</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_line({j1,j2,j3,j4,j5,j6},true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Incoming parameters are the six joint angles of the manipulator, in radians. Move linearly to position in space.</span></p>
+
+        <h2><span style='font-size:16.0pt;line-height:172%;font-family:宋体'>VI. Demo</span></h2>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To the camera in the form of joint movement to the location</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_joint(get_waypoint_from_camera(</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0018,0.01270,0.399,true)</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the form of a straight line to the camera to the position</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_line(get_waypoint_from_camera(</span></p>
+            <p><span style='font-size:14.0pt;line-height:172%;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0018,0.01270,0.399,true)</span></p>
+
+	</div>
+	<div id="columnB">
+
+	</div>
+</div>
+<div id="footer">
+	<p><a href="http://www.our-robotics.com/" class="link1">AuBo (Beijing) Intelligent Technology Co.Ltd.</a>  </p>
+</div>
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span><span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>
